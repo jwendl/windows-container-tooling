@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ServiceProcessWatcher.EventLog\ServiceProcessWatcher.EventLog.csproj" />
     <ProjectReference Include="..\ServiceProcessWatcher.Logging\ServiceProcessWatcher.Logging.csproj" />
     <ProjectReference Include="..\ServiceProcessWatcher.ServiceManagement\ServiceProcessWatcher.ServiceManagement.csproj" />
   </ItemGroup>

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace ServiceProcessWatcher.Console
 {
@@ -10,11 +8,18 @@ namespace ServiceProcessWatcher.Console
         public List<LogConfiguration> Logs { get; set; }
 
         public List<ETWConfiguration> Etw { get; set; }
+
+        public List<EventLogConfiguration> EventLogs { get; set; }
     }
 
     public class ETWConfiguration
     {
         public string ProviderName { get; set; }
+    }
+
+    public class EventLogConfiguration
+    {
+        public string LogName { get; set; }
     }
 
     public class LogConfiguration
