@@ -1,5 +1,7 @@
 ﻿using ServiceProcessWatcher.ETW;
 using System;
+using System.IO;
+using System.Threading;
 
 using Newtonsoft.Json;
 using ServiceProcessWatcher.ServiceManagement;
@@ -15,6 +17,8 @@ namespace ServiceProcessWatcher.Console
             var config = JsonConvert.DeserializeObject<Configuration>(configText);
 
             // TODO: Set up logs
+
+            // ETW
             using (var etwWatcher = new EtwWatcher(Ouputer))
             {
                 etwWatcher.Watch("Microsoft-Demos-MySource");
