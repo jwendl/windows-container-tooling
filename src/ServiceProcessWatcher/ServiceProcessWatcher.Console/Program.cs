@@ -1,10 +1,8 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Threading;
 
 using Newtonsoft.Json;
 using ServiceProcessWatcher.ServiceManagement;
-
 namespace ServiceProcessWatcher.Console
 {
     class Program
