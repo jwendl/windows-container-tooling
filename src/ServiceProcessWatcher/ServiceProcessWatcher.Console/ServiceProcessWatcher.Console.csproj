@@ -16,4 +16,8 @@
     <ProjectReference Include="..\ServiceProcessWatcher.ServiceManagement\ServiceProcessWatcher.ServiceManagement.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ServiceProcessWatcher.ETW\ServiceProcessWatcher.ETW.csproj" />
+  </ItemGroup>
+
 </Project>

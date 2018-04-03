@@ -5,13 +5,17 @@ VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceProcessWatcher.Console", "ServiceProcessWatcher.Console\ServiceProcessWatcher.Console.csproj", "{8A8FCC07-765F-434F-A0AE-8B21FB1F84A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceProcessWatcher.Logging", "ServiceProcessWatcher.Logging\ServiceProcessWatcher.Logging.csproj", "{31DBDDFF-9724-438A-9F06-89A2437336BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceProcessWatcher.Logging", "ServiceProcessWatcher.Logging\ServiceProcessWatcher.Logging.csproj", "{31DBDDFF-9724-438A-9F06-89A2437336BE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceProcessWatcher.ServiceManagement", "ServiceProcessWatcher.ServiceManagement\ServiceProcessWatcher.ServiceManagement.csproj", "{C892C0D2-3C1B-4EFE-8D65-F15E32C2A0E5}"
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{93CEEAF8-96F6-4E1C-9F8B-5682DCAE369B}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\samples\basic.json = ..\..\samples\basic.json
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceProcessWatcher.ETW", "ServiceProcessWatcher.ETW\ServiceProcessWatcher.ETW.csproj", "{558DE85C-70D5-4667-9350-1AE20DE35C86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleEtwLogger", "samples\ConsoleEtwLogger\ConsoleEtwLogger.csproj", "{0664D489-E681-4396-A15B-3C2322775632}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +35,14 @@ Global
 		{C892C0D2-3C1B-4EFE-8D65-F15E32C2A0E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C892C0D2-3C1B-4EFE-8D65-F15E32C2A0E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C892C0D2-3C1B-4EFE-8D65-F15E32C2A0E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{558DE85C-70D5-4667-9350-1AE20DE35C86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{558DE85C-70D5-4667-9350-1AE20DE35C86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{558DE85C-70D5-4667-9350-1AE20DE35C86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{558DE85C-70D5-4667-9350-1AE20DE35C86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0664D489-E681-4396-A15B-3C2322775632}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0664D489-E681-4396-A15B-3C2322775632}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0664D489-E681-4396-A15B-3C2322775632}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0664D489-E681-4396-A15B-3C2322775632}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

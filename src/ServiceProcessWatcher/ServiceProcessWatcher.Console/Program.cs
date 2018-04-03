@@ -1,5 +1,5 @@
-﻿using System.IO;
-using System.Threading;
+﻿using ServiceProcessWatcher.ETW;
+using System;
 
 using Newtonsoft.Json;
 using ServiceProcessWatcher.ServiceManagement;
@@ -15,6 +15,12 @@ namespace ServiceProcessWatcher.Console
             var config = JsonConvert.DeserializeObject<Configuration>(configText);
 
             // TODO: Set up logs
+            using (var etwWatcher = new EtwWatcher(Ouputer))
+            {
+                etwWatcher.Watch("Microsoft-Demos-MySource");
+                //etwWatcher.Watch("Microsoft-Windows-IIS-Logging");
+                etwWatcher.StartListening();
+            }
 
             // Watch services
             IServiceWatcher serviceWatcher = new PollingServiceWatcher();
@@ -27,6 +33,12 @@ namespace ServiceProcessWatcher.Console
         {
             System.Console.WriteLine(reason);
             Environment.Exit(1);
+          
+        }
+
+        static void Ouputer(string output)
+        {
+            System.Console.WriteLine(output);
         }
     }
 }
