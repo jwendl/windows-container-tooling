@@ -13,7 +13,7 @@ namespace ServiceProcessWatcher.ServiceManagement
         public void StartServices(IEnumerable<string> serviceNames, Action<string> callback)
         {
             var services = new List<ServiceController>();
-            foreach(var name in serviceNames)
+            foreach (var name in serviceNames)
             {
                 var service = new ServiceController(name);
                 services.Add(service);
@@ -27,9 +27,9 @@ namespace ServiceProcessWatcher.ServiceManagement
 
         private async Task WatchServices(IEnumerable<ServiceController> services, Action<string> callback)
         {
-            while(true)
+            while (true)
             {
-                foreach(var service in services)
+                foreach (var service in services)
                 {
                     service.Refresh();
                     switch (service.Status)
