@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ServiceProcessWatcher.Logging.Interfaces;
+using ServiceProcessWatcher.ServiceManagement.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.ServiceProcess;
@@ -6,14 +8,22 @@ using System.Threading.Tasks;
 
 namespace ServiceProcessWatcher.ServiceManagement
 {
-    public class PollingServiceWatcher : IServiceWatcher
+    public class PollingServiceWatcher
+        : IServiceWatcher
     {
+        private readonly ILoggingProvider loggingProvider;
+
+        public PollingServiceWatcher(ILoggingProvider loggingProvider)
+        {
+            this.loggingProvider = loggingProvider;
+        }
+
         private const int PollInterval = 10 * 1000;
 
-        public void StartServices(IEnumerable<string> serviceNames, Action<string> callback)
+        public void StartServices(IEnumerable<string> serviceNames)
         {
             var services = new List<ServiceController>();
-            foreach(var name in serviceNames)
+            foreach (var name in serviceNames)
             {
                 var service = new ServiceController(name);
                 services.Add(service);
@@ -22,14 +32,14 @@ namespace ServiceProcessWatcher.ServiceManagement
                 Debug.WriteLine($"Started service {service}");
             }
 
-            Task.Run(() => WatchServices(services, callback));
+            Task.Run(() => WatchServices(services));
         }
 
-        private async Task WatchServices(IEnumerable<ServiceController> services, Action<string> callback)
+        private async Task WatchServices(IEnumerable<ServiceController> services)
         {
-            while(true)
+            while (true)
             {
-                foreach(var service in services)
+                foreach (var service in services)
                 {
                     service.Refresh();
                     switch (service.Status)
@@ -38,8 +48,8 @@ namespace ServiceProcessWatcher.ServiceManagement
                             break;
                         default:
                             Debug.WriteLine($"{service.ServiceName} is not running");
-                            callback($"{service.ServiceName} is not running");
-                            break;
+                            loggingProvider.LogInformation($"{service.ServiceName} is not running");
+                            throw new InvalidOperationException($"{service.ServiceName} is not running");
                     }
                 }
 

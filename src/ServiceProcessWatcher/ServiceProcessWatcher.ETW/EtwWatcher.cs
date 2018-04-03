@@ -1,20 +1,20 @@
-﻿using System;
-using Microsoft.Diagnostics.Tracing;
-using Microsoft.Diagnostics.Tracing.Parsers;
-using Microsoft.Diagnostics.Tracing.Parsers.IIS_Trace;
-using Microsoft.Diagnostics.Tracing.Parsers.Kernel;
+﻿using Microsoft.Diagnostics.Tracing;
 using Microsoft.Diagnostics.Tracing.Session;
+using ServiceProcessWatcher.ETW.Interfaces;
+using ServiceProcessWatcher.Logging.Interfaces;
+using System;
 
 namespace ServiceProcessWatcher.ETW
 {
-    public class EtwWatcher : IDisposable
+    public class EtwWatcher
+        : IEtwWatcher, IDisposable
     {
-        private readonly Action<string> output;
         private readonly TraceEventSession session;
+        private readonly ILoggingProvider loggingProvider;
 
-        public EtwWatcher(Action<string> output)
+        public EtwWatcher(ILoggingProvider loggingProvider)
         {
-            this.output = output;
+            this.loggingProvider = loggingProvider;
             session = new TraceEventSession("ServiceProcessWatcher");
         }
 
@@ -25,7 +25,7 @@ namespace ServiceProcessWatcher.ETW
 
             session.Source.Dynamic.All += traceEvent =>
             {
-                output(traceEvent.ToString());
+                loggingProvider.LogInformation(traceEvent);
             };
         }
 
@@ -35,14 +35,14 @@ namespace ServiceProcessWatcher.ETW
             session.EnableProvider(providerName);
             session.Source.Dynamic.AddCallbackForProviderEvent(providerName, eventName, traceEvent =>
             {
-                output(traceEvent.ToString());
+                loggingProvider.LogInformation(traceEvent);
             });
         }
 
         public void StartListening()
         {
             // Listen (forever) for events till disposed is called.
-            session.Source.Process();   
+            session.Source.Process();
         }
 
         private void Dispose(bool disposing)

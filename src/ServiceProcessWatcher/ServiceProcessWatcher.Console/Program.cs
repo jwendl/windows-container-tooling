@@ -1,10 +1,14 @@
-﻿using ServiceProcessWatcher.ETW;
-using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
+using ServiceProcessWatcher.ETW;
+using ServiceProcessWatcher.ETW.Interfaces;
+using ServiceProcessWatcher.Logging;
+using ServiceProcessWatcher.Logging.Interfaces;
+using ServiceProcessWatcher.ServiceManagement;
+using ServiceProcessWatcher.ServiceManagement.Interfaces;
 using System.IO;
 using System.Threading;
 
-using Newtonsoft.Json;
-using ServiceProcessWatcher.ServiceManagement;
 namespace ServiceProcessWatcher.Console
 {
     class Program
@@ -17,9 +21,18 @@ namespace ServiceProcessWatcher.Console
             var config = JsonConvert.DeserializeObject<Configuration>(configText);
 
             // TODO: Set up logs
+            var serviceCollection = new ServiceCollection();
+            serviceCollection.AddScoped<ILoggingProvider, LoggingProvider>((sp) =>
+            {
+                return new LoggingProvider(System.Console.Out);
+            });
+            serviceCollection.AddScoped<IServiceWatcher, PollingServiceWatcher>();
+            serviceCollection.AddScoped<IEtwWatcher, EtwWatcher>();
+
+            var serviceProvider = serviceCollection.BuildServiceProvider();
 
             // ETW
-            using (var etwWatcher = new EtwWatcher(Ouputer))
+            using (var etwWatcher = serviceProvider.GetRequiredService<IEtwWatcher>())
             {
                 etwWatcher.Watch("Microsoft-Demos-MySource");
                 //etwWatcher.Watch("Microsoft-Windows-IIS-Logging");
@@ -27,22 +40,10 @@ namespace ServiceProcessWatcher.Console
             }
 
             // Watch services
-            IServiceWatcher serviceWatcher = new PollingServiceWatcher();
-            serviceWatcher.StartServices(config.Services, Crash);
+            var serviceWatcher = serviceProvider.GetRequiredService<IServiceWatcher>();
+            serviceWatcher.StartServices(config.Services);
 
             Thread.Sleep(Timeout.Infinite);
-        }
-
-        private static void Crash(string reason)
-        {
-            System.Console.WriteLine(reason);
-            Environment.Exit(1);
-          
-        }
-
-        static void Ouputer(string output)
-        {
-            System.Console.WriteLine(output);
         }
     }
 }

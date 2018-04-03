@@ -1,12 +1,11 @@
 ﻿using ServiceProcessWatcher.Logging.Interfaces;
-using System;
 using System.IO;
 using System.Threading.Tasks;
 
 namespace ServiceProcessWatcher.Logging
 {
-    public class LoggingProvider<TInput>
-        : ILoggingProvider<TInput>
+    public class LoggingProvider
+        : ILoggingProvider
     {
         private readonly TextWriter textWriter;
 
@@ -15,10 +14,14 @@ namespace ServiceProcessWatcher.Logging
             this.textWriter = textWriter;
         }
 
-        public async Task LogInformationAsync(Func<TInput, Task> method, TInput input)
+        public void LogInformation<TInput>(TInput input)
+        {
+            textWriter.WriteLine(input.ToString());
+        }
+
+        public async Task LogInformationAsync<TInput>(TInput input)
         {
             await textWriter.WriteLineAsync(input.ToString());
-            await method(input);
         }
     }
 }

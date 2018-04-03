@@ -1,10 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace ServiceProcessWatcher.Logging.Interfaces
 {
-    public interface ILoggingProvider<TInput>
+    public interface ILoggingProvider
     {
-        Task LogInformationAsync(Func<TInput, Task> method, TInput input);
+        void LogInformation<TInput>(TInput input);
+
+        Task LogInformationAsync<TInput>(TInput input);
     }
 }
