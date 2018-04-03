@@ -8,6 +8,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceProcessWatcher.Logging", "ServiceProcessWatcher.Logging\ServiceProcessWatcher.Logging.csproj", "{31DBDDFF-9724-438A-9F06-89A2437336BE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceProcessWatcher.ServiceManagement", "ServiceProcessWatcher.ServiceManagement\ServiceProcessWatcher.ServiceManagement.csproj", "{C892C0D2-3C1B-4EFE-8D65-F15E32C2A0E5}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{93CEEAF8-96F6-4E1C-9F8B-5682DCAE369B}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\samples\basic.json = ..\..\samples\basic.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
