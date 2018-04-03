@@ -2,5 +2,13 @@
   "services": [
     "W3SVC"
   ],
-  "logs": []
+  "logs": [],
+  "etw": [
+    {
+      "providerName": "Microsoft-Demos-MySource"
+    }
+    //{
+    //  "providerName": "Microsoft-Windows-IIS-Logging"
+    //}
+  ] 
 }
