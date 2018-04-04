@@ -14,18 +14,24 @@ namespace ServiceProcessWatcher.Console
     {
         static void Main(string[] args)
         {
+            Outputer("Starting watcher process..");
+
             // Read configuration
             var configPath = args[0];
+
+            Outputer($"Loading config path from {configPath}");
             var configText = File.ReadAllText(configPath);
             var config = JsonConvert.DeserializeObject<Configuration>(configText);
 
             // TODO: Set up logs
             if (config.Etw.Any())
             {
+                Outputer($"Configuring ETW providers...");
                 using (var etwWatcher = new EtwWatcher(Outputer))
                 {
                     foreach (var etwConfiguration in config.Etw)
                     {
+                        Outputer($"Adding Provider: {etwConfiguration.ProviderName}");
                         etwWatcher.Watch(etwConfiguration.ProviderName);
                     }
 
@@ -35,14 +41,17 @@ namespace ServiceProcessWatcher.Console
 
             if (config.EventLogs.Any())
             {
+                Outputer($"Configuring EventLogs...");
                 var eventLogWatcher = new EventLogWatcher(Outputer);
                 foreach (var eventLog in config.EventLogs)
                 {
+                    Outputer($"Adding EventLog: {eventLog.LogName}");
                     eventLogWatcher.Watch(eventLog.LogName);
                 }
             }
 
             // Watch services
+            Outputer($"Starting services");
             IServiceWatcher serviceWatcher = new PollingServiceWatcher();
             serviceWatcher.StartServices(config.Services, Crash);
 
@@ -51,7 +60,8 @@ namespace ServiceProcessWatcher.Console
 
         private static void Crash(string reason)
         {
-            System.Console.WriteLine(reason);
+            Outputer("Service stopped");
+            Outputer(reason);
             Environment.Exit(1);
 
         }
