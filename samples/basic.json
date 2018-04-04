@@ -5,11 +5,8 @@
   "logs": [],
   "etw": [
     {
-      "providerName": "Microsoft-Demos-MySource"
-    },
-    //{
-    //  "providerName": "Microsoft-Windows-IIS-Logging"
-    //}
+      "providerName": "Microsoft-Windows-IIS-Logging"
+    }
   ],
   "eventLogs": [
     {
