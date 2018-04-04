@@ -4,12 +4,13 @@ namespace ServiceProcessWatcher.Console
 {
     public class Configuration
     {
-        public List<string> Services { get; set; }
-        public List<LogConfiguration> Logs { get; set; }
+        public List<string> Services { get; set; } = new List<string>();
 
-        public List<ETWConfiguration> Etw { get; set; }
+        public List<LogConfiguration> Logs { get; set; } = new List<LogConfiguration>();
 
-        public List<EventLogConfiguration> EventLogs { get; set; }
+        public List<ETWConfiguration> Etw { get; set; } = new List<ETWConfiguration>();
+
+        public List<EventLogConfiguration> EventLogs { get; set; } = new List<EventLogConfiguration>();
     }
 
     public class ETWConfiguration

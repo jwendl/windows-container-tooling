@@ -18,7 +18,8 @@ namespace ServiceProcessWatcher.ServiceManagement
                 var service = new ServiceController(name);
                 services.Add(service);
 
-                service.Start();
+                if (service.Status != ServiceControllerStatus.Running)
+                    service.Start();
                 Debug.WriteLine($"Started service {service}");
             }
 
