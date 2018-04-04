@@ -20,7 +20,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleEtwLogger", "samples
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "testing-samples", "testing-samples", "{94E29F99-6304-4469-94DD-34E82FCF06EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceProcessWatcher.EventLog", "ServiceProcessWatcher.EventLog\ServiceProcessWatcher.EventLog.csproj", "{B6B3D3DB-C80F-4109-AF1D-F36E0B850193}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceProcessWatcher.EventLog", "ServiceProcessWatcher.EventLog\ServiceProcessWatcher.EventLog.csproj", "{B6B3D3DB-C80F-4109-AF1D-F36E0B850193}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceProcessWatcher.LogFile", "ServiceProcessWatcher.LogFile\ServiceProcessWatcher.LogFile.csproj", "{32DBD0F9-7EB5-41BD-B1CB-04D62624A7FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,6 +54,10 @@ Global
 		{B6B3D3DB-C80F-4109-AF1D-F36E0B850193}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6B3D3DB-C80F-4109-AF1D-F36E0B850193}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6B3D3DB-C80F-4109-AF1D-F36E0B850193}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32DBD0F9-7EB5-41BD-B1CB-04D62624A7FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32DBD0F9-7EB5-41BD-B1CB-04D62624A7FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32DBD0F9-7EB5-41BD-B1CB-04D62624A7FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32DBD0F9-7EB5-41BD-B1CB-04D62624A7FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
