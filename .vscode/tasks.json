@@ -1,0 +1,29 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/ServiceProcessWatcher/ServiceProcessWatcher.Console/ServiceProcessWatcher.Console.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/src/ServiceProcessWatcher/ServiceProcessWatcher.Console/ServiceProcessWatcher.Console.csproj",
+                "-c",
+                "Release",
+                "-r",
+                "win10-x64"
+            ],
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}
