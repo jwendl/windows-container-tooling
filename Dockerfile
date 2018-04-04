@@ -16,6 +16,8 @@ RUN echo $env:CONFIGURATION; `
 ## final image
 FROM microsoft/aspnet:4.7.1-windowsservercore-1709
 
+RUN Set-WebConfigurationProperty -pspath 'MACHINE/WEBROOT/APPHOST'  -filter "system.applicationHost/sites/sitedefaults/logFile" -name "logTargetW3C" -value "ETW"
+
 WORKDIR /inetpub/wwwroot
 COPY --from=build-agent C:\out\_PublishedWebsites\IISLoggerApp .
 
