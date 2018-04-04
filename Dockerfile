@@ -20,7 +20,7 @@ WORKDIR /inetpub/wwwroot
 COPY --from=build-agent C:\out\_PublishedWebsites\IISLoggerApp .
 
 WORKDIR /app
-COPY src/ServiceProcessWatcher/ServiceProcessWatcher.Console/bin/Release/PublishOutput .
+COPY src/ServiceProcessWatcher/ServiceProcessWatcher.Console/bin/Release/netcoreapp2.0/win10-x64/publish/ .
 COPY samples/basic.json .
 
 ## override with new service process watcher
