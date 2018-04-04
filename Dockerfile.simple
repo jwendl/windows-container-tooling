@@ -1,0 +1,8 @@
+FROM microsoft/iis:windowsservercore-1709
+
+WORKDIR /app
+
+COPY src/ServiceProcessWatcher/ServiceProcessWatcher.Console/bin/Release/PublishOutput .
+COPY samples/basic.json .
+
+ENTRYPOINT ["C:\\app\\ServiceProcessWatcher.Console.exe","basic.json"]
