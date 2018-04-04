@@ -18,10 +18,3 @@ FROM microsoft/aspnet:4.7.1-windowsservercore-1709
 
 WORKDIR /inetpub/wwwroot
 COPY --from=build-agent C:\out\_PublishedWebsites\IISLoggerApp .
-
-WORKDIR /app
-COPY src/ServiceProcessWatcher/ServiceProcessWatcher.Console/bin/Release/PublishOutput .
-COPY samples/basic.json .
-
-## override with new service process watcher
-ENTRYPOINT ["C:\\app\\ServiceProcessWatcher.Console.exe","basic.json"]

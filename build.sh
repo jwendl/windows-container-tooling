@@ -1,3 +1,3 @@
-docker build -t logger .
-docker tag logger:latest jsturtevant/logger:latest
-docker push jsturtevant/logger:latest
+docker build -f Dockerfile -t watcher-aspnet .
+docker build -f Dockerfile.IISServiceMonitor -t service-monitor .
+docker build -f Dockerfile.simple -t monitor .
