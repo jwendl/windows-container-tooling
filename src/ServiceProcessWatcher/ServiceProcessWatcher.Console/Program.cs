@@ -28,7 +28,7 @@ namespace ServiceProcessWatcher.Console
                         etwWatcher.Watch(etwConfiguration.ProviderName);
                     }
 
-                    etwWatcher.StartListening();
+                    Task.Run(() => etwWatcher.StartListening());
                 }
             }
 
