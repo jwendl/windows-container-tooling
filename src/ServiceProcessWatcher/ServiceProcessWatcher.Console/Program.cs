@@ -27,16 +27,14 @@ namespace ServiceProcessWatcher.Console
             if (config.Etw.Any())
             {
                 Outputer($"Configuring ETW providers...");
-                using (var etwWatcher = new EtwWatcher(Outputer))
+                var etwWatcher = new EtwWatcher(Outputer);
+                foreach (var etwConfiguration in config.Etw)
                 {
-                    foreach (var etwConfiguration in config.Etw)
-                    {
-                        Outputer($"Adding Provider: {etwConfiguration.ProviderName}");
-                        etwWatcher.Watch(etwConfiguration.ProviderName);
-                    }
-
-                    Task.Run(() => etwWatcher.StartListening());
+                    Outputer($"Adding Provider: {etwConfiguration.ProviderName}");
+                    etwWatcher.Watch(etwConfiguration.ProviderName);
                 }
+
+                Task.Run(() => etwWatcher.StartListening());
             }
 
             if (config.EventLogs.Any())

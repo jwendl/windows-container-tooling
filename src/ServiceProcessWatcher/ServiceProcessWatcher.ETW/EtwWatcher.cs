@@ -52,7 +52,8 @@ namespace ServiceProcessWatcher.ETW
                 // session.StopOnDispose = true; //default
                 // By calling dispose the session will stop. 
                 // this is the way to stop the realtime session
-                // in a timely maner
+                // in a timely manner
+                output("disposing of etw wacher");
                 session?.Dispose();
             }
         }
