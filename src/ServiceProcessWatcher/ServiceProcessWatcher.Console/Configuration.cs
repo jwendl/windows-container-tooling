@@ -21,6 +21,7 @@ namespace ServiceProcessWatcher.Console
     public class EventLogConfiguration
     {
         public string LogName { get; set; }
+        public string Source { get; set; }
     }
 
     public class LogConfiguration

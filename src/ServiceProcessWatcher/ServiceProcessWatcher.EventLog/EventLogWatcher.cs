@@ -1,7 +1,6 @@
 ﻿using ServiceProcessWatcher.EventLog.Interfaces;
 using System;
 using System.Diagnostics;
-using System.Text;
 using DiagEventLog = System.Diagnostics.EventLog;
 
 namespace ServiceProcessWatcher.EventLog
@@ -10,23 +9,29 @@ namespace ServiceProcessWatcher.EventLog
         : IEventLogWatcher
     {
         private readonly Action<string> output;
+        private readonly string source;
 
-        public EventLogWatcher(Action<string> output)
+        public EventLogWatcher(Action<string> output, string source)
         {
             this.output = output;
+            this.source = source;
         }
 
         public void Watch(string logName)
         {
-            var eventLog = new DiagEventLog(logName);
+            var eventLog = new DiagEventLog(logName, ".", source)
+            {
+                EnableRaisingEvents = true,
+            };
             eventLog.EntryWritten += EventLog_EntryWritten;
         }
 
         private void EventLog_EntryWritten(object sender, EntryWrittenEventArgs e)
         {
-            var bytes = e.Entry.Data;
-            var message = Encoding.UTF8.GetString(bytes);
-            output(message);
+            if (e.Entry.Source == source)
+            {
+                output(e.Entry.Message);
+            }
         }
     }
 }

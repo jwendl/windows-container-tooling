@@ -12,7 +12,7 @@ namespace ServiceProcessWatcher.Console
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             Outputer("Starting watcher process..");
 
@@ -40,11 +40,14 @@ namespace ServiceProcessWatcher.Console
             if (config.EventLogs.Any())
             {
                 Outputer($"Configuring EventLogs...");
-                var eventLogWatcher = new EventLogWatcher(Outputer);
                 foreach (var eventLog in config.EventLogs)
                 {
                     Outputer($"Adding EventLog: {eventLog.LogName}");
-                    eventLogWatcher.Watch(eventLog.LogName);
+                    Task.Run(() =>
+                    {
+                        var eventLogWatcher = new EventLogWatcher(Outputer, eventLog.Source);
+                        eventLogWatcher.Watch(eventLog.LogName);
+                    });
                 }
             }
 
