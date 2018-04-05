@@ -17,9 +17,10 @@ namespace Logger.Controllers
 
         public ActionResult File()
         {
-            Trace.WriteLine("About Page from trace out");
+            Trace.WriteLine($"{DateTime.Now.ToLongTimeString()}: Trace message");
 
-            ViewBag.Message = "Your application description page.";
+            ViewBag.FileName = "log.log";
+            ViewBag.Message = "Write to file.";
 
             return View();
         }
