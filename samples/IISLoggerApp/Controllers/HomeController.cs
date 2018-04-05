@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Diagnostics.Tracing;
+using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Logger.Controllers
@@ -30,6 +33,18 @@ namespace Logger.Controllers
             return View();
         }
 
+        
+        public ActionResult CustomEtw()
+        {
+            ViewBag.Message = "Custom ETW";
+
+            ViewBag.CustomEventSource = Logger.SAMPLE_TESTSOURCE;
+            Logger.Log.MyFirstEvent("Hi", 1);
+            Logger.Log.MySecondEvent(1);
+
+            return View();
+        }
+
         public ActionResult LogEventLog()
         {
             var source = "TestSource";
@@ -51,5 +66,15 @@ namespace Logger.Controllers
 
             return View();
         }
+    }
+
+    [EventSource(Name = SAMPLE_TESTSOURCE)]
+    class Logger : EventSource
+    {
+        public void MyFirstEvent(string MyName, int MyId) { WriteEvent(1, MyName, MyId); }
+        public void MySecondEvent(int MyId) { WriteEvent(2, MyId); }
+
+        public const string SAMPLE_TESTSOURCE = "Sample-Demos-TestSource";
+        public static Logger Log = new Logger();
     }
 }
