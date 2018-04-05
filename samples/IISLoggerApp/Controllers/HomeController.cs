@@ -11,14 +11,12 @@ namespace Logger.Controllers
     {
         public ActionResult Index()
         {
-            Console.WriteLine("Hello world from console out");
-            Trace.WriteLine("Hello world from trace out");
+            //home page will trigger ETW iis logs if turned on in iis
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult File()
         {
-            Console.WriteLine("About Page from console out");
             Trace.WriteLine("About Page from trace out");
 
             ViewBag.Message = "Your application description page.";
@@ -26,9 +24,24 @@ namespace Logger.Controllers
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult LogEventLog()
         {
-            ViewBag.Message = "Your contact page.";
+            var source = "TestSource";
+            var eventLogMessage = "Writing to event log.";
+
+            ViewBag.Message = "Logging eventlog";
+            ViewBag.LogName = "Application";
+
+            ViewBag.Source = source;
+            ViewBag.EventLogMessage = eventLogMessage;
+
+
+           // Create an EventLog instance and assign its source.
+            EventLog myLog = new EventLog();
+            myLog.Source = source;
+
+            // Write an informational entry to the event log.    
+            myLog.WriteEntry(eventLogMessage);
 
             return View();
         }
