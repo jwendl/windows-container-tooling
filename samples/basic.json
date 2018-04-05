@@ -1,11 +1,14 @@
 {
   "services": [
-    "W3SVC"
+    "W3SVC"  
   ],
   "logs": [],
   "etw": [
     {
       "providerName": "Microsoft-Windows-IIS-Logging"
+    },
+    {
+      "providerName": "Sample-Demos-TestSource"
     }
   ],
   "eventLogs": [
