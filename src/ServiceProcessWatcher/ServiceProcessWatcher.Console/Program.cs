@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using ServiceProcessWatcher.ETW;
 using ServiceProcessWatcher.EventLog;
+using ServiceProcessWatcher.LogFile;
 using ServiceProcessWatcher.ServiceManagement;
 using System;
 using System.IO;
@@ -47,6 +48,20 @@ namespace ServiceProcessWatcher.Console
                     {
                         var eventLogWatcher = new EventLogWatcher(Outputer, eventLog.Source);
                         eventLogWatcher.Watch(eventLog.LogName);
+                    });
+                }
+            }
+
+            if (config.LogFiles.Any())
+            {
+                Outputer("Configuring Logs...");
+                foreach (var logFile in config.LogFiles)
+                {
+                    Outputer($"Adding Logs: {logFile.Location}");
+                    Task.Run(() =>
+                    {
+                        var logFileWatcher = new LogFileWatcher(Outputer);
+                        logFileWatcher.Watch(logFile.Location);
                     });
                 }
             }

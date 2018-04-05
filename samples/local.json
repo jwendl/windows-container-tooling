@@ -11,7 +11,12 @@
   "eventLogs": [
     {
       "logName": "Application",
-      "source":  "TestSource"
+      "source": "TestSource"
+    }
+  ],
+  "logFiles": [
+    {
+      "location": "C:\\Source\\GitHub\\windows-container-tooling\\samples\\IISLoggerApp\\App_Data"
     }
   ]
 }

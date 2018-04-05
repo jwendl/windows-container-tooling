@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Web;
+using System.IO;
 using System.Web.Mvc;
 
 namespace Logger.Controllers
@@ -22,6 +20,13 @@ namespace Logger.Controllers
             ViewBag.FileName = "log.log";
             ViewBag.Message = "Write to file.";
 
+            var path = Path.Combine(AppDomain.CurrentDomain.GetData("DataDirectory").ToString(), $"{DateTime.Now.ToString("yyyy-MM-dd")}-Logs.txt");
+            var fileInfo = new FileInfo(path);
+            using (var streamWriter = new StreamWriter(fileInfo.FullName, true))
+            {
+                streamWriter.WriteLine($"This is a test {DateTime.Now}");
+            }
+
             return View();
         }
 
@@ -37,7 +42,7 @@ namespace Logger.Controllers
             ViewBag.EventLogMessage = eventLogMessage;
 
 
-           // Create an EventLog instance and assign its source.
+            // Create an EventLog instance and assign its source.
             EventLog myLog = new EventLog();
             myLog.Source = source;
 

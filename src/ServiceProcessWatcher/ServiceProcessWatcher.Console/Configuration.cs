@@ -6,7 +6,7 @@ namespace ServiceProcessWatcher.Console
     {
         public List<string> Services { get; set; } = new List<string>();
 
-        public List<LogConfiguration> Logs { get; set; } = new List<LogConfiguration>();
+        public List<LogConfiguration> LogFiles { get; set; } = new List<LogConfiguration>();
 
         public List<ETWConfiguration> Etw { get; set; } = new List<ETWConfiguration>();
 

@@ -12,13 +12,14 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{93CEEAF8-96F6-4E1C-9F8B-5682DCAE369B}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\samples\basic.json = ..\..\samples\basic.json
+		..\..\samples\local.json = ..\..\samples\local.json
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceProcessWatcher.ETW", "ServiceProcessWatcher.ETW\ServiceProcessWatcher.ETW.csproj", "{558DE85C-70D5-4667-9350-1AE20DE35C86}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceProcessWatcher.EventLog", "ServiceProcessWatcher.EventLog\ServiceProcessWatcher.EventLog.csproj", "{B6B3D3DB-C80F-4109-AF1D-F36E0B850193}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceProcessWatcher.LogFile", "ServiceProcessWatcher.LogFile\ServiceProcessWatcher.LogFile.csproj", "{32DBD0F9-7EB5-41BD-B1CB-04D62624A7FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceProcessWatcher.LogFile", "ServiceProcessWatcher.LogFile\ServiceProcessWatcher.LogFile.csproj", "{32DBD0F9-7EB5-41BD-B1CB-04D62624A7FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
