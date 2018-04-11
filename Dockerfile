@@ -9,9 +9,9 @@ WORKDIR C:\src
 COPY samples\IISLoggerApp\packages.config .\IISLoggerApp\
 RUN nuget restore IISLoggerApp\packages.config -PackagesDirectory .\IISLoggerApp\packages
 
-COPY samples\IISLoggerApp C:\src
+COPY samples\IISLoggerApp C:\src\IISLoggerApp
 RUN echo $env:CONFIGURATION; ` 
-    msbuild IISLoggerApp.csproj /p:OutputPath=C:\out /p:DeployOnBuild=true /p:Configuration=$env:CONFIGURATION
+    msbuild IISLoggerApp\IISLoggerApp.csproj /p:OutputPath=C:\out /p:DeployOnBuild=true /p:Configuration=$env:CONFIGURATION
 
 ## final image
 FROM microsoft/aspnet:4.7.1-windowsservercore-1709
