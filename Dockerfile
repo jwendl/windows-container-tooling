@@ -20,6 +20,8 @@ FROM microsoft/aspnet:4.7.1-windowsservercore-1709
 RUN Set-WebConfigurationProperty -pspath 'MACHINE/WEBROOT/APPHOST'  -filter "system.applicationHost/sites/sitedefaults/logFile" -name "logTargetW3C" -value "ETW"; `
      New-EventLog -LogName Application -Source "TestSource";
 
+RUN ["icacls C:/inetpub/wwwroot/logs /grant IIS_IUSRS:f /T" ]
+
 WORKDIR /inetpub/wwwroot
 COPY --from=build-agent C:\out\_PublishedWebsites\IISLoggerApp .
 
